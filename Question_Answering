@@ -1,0 +1,40 @@
+# Use a pipeline as a high-level helper
+from transformers import pipeline
+
+pipe = pipeline("question-answering", model="deepset/roberta-base-squad2")
+
+from transformers import AutoModelForQuestionAnswering, AutoTokenizer, pipeline
+
+model_name = "deepset/roberta-base-squad2"
+
+story = '''In the small village of Ananda, nestled between rolling green hills and a tranquil river, lived a wise and humble man named Vishnu. Known for his gentle demeanor and vast knowledge, Vishnu was beloved by all the villagers. He spent his days tending to his lush garden and teaching the local children about the wonders of nature and the importance of kindness.
+
+One sunny morning, as Vishnu was meditating by the riverbank, he noticed something peculiar. A tiny bird, with vibrant blue and green feathers, was struggling in the water. Without hesitation, Vishnu waded into the river and gently scooped the bird into his hands. He carefully dried its delicate wings and placed it on a soft patch of grass.
+
+"Thank you," chirped the bird, much to Vishnu's astonishment. "I am no ordinary bird. I am a messenger of the forest spirit. You have shown great compassion, and for that, I grant you one wish."
+
+Vishnu, though surprised, smiled warmly. "Thank you, little friend. My wish is simple. I wish for the well-being and happiness of all the people in our village."
+
+The bird nodded and took flight, disappearing into the canopy of trees. From that day on, Ananda flourished. The crops grew in abundance, the river sparkled with crystal-clear water, and the villagers lived in harmony. Everyone's hearts were filled with joy and contentment, and they often wondered about the source of their newfound fortune.
+
+Years passed, and Vishnu continued his quiet life of teaching and nurturing the village. One evening, as he sat by the river watching the sunset, the same vibrant bird appeared again.
+
+"Vishnu," the bird said, "your wish has brought great happiness to Ananda. The forest spirit is pleased with your selflessness. As a token of gratitude, you are invited to visit the sacred grove, a place where few humans have ever been."
+
+Intrigued, Vishnu followed the bird deep into the forest, where the trees grew taller and the air shimmered with a mystical glow. They arrived at a clearing, bathed in soft, golden light. In the center stood a grand tree, its branches stretching towards the heavens.
+
+"Welcome, Vishnu," a gentle voice echoed. The tree itself seemed to speak, its leaves rustling like a melodic symphony. "You have shown that true happiness comes from the well-being of others. For this, you are blessed with eternal wisdom and peace."
+
+Vishnu felt a wave of serenity wash over him. From that moment on, he carried a radiant aura of tranquility. He returned to Ananda, continuing to spread wisdom and kindness, his presence a constant reminder of the power of selflessness.
+
+The village of Ananda remained a beacon of prosperity and joy, its people ever grateful to the humble man who had wished for their happiness. And so, the legend of Vishnu, the wise and compassionate guardian of Ananda, lived on, inspiring generations to come.'''
+
+# a) Get predictions
+nlp = pipeline('question-answering', model=model_name, tokenizer=model_name)
+QA_input = {
+    'question': 'What is the main character name?',
+    'context': story
+}
+res = nlp(QA_input)
+
+print(res)
